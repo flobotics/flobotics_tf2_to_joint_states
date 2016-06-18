@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<robot name="finger">
+  <link name="base_link">
+    <visual>
+      <geometry>
+	<mesh filename="file:///home/ros/Downloads/150917_Daten_Roboterfinger/metacarpal.stl" scale="0.001 0.001 0.001"/>        
+      </geometry>
+    </visual>
+  </link>
+  <link name="metacarpal_joint">
+    <visual>
+      <geometry>
+        <mesh filename="file:///home/ros/Downloads/150917_Daten_Roboterfinger/metacarpal_joint.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+        <material name="blue">
+        <color rgba="0 0 .8 1"/>
+	</material>
+	<origin rpy="0 0 0" xyz="0 0 -0.004"/>
+    </visual>
+  </link>
+
+  <joint name="base_to_metacarpal_joint" type="revolute">
+    <axis xyz="1 0 0"/>
+    <limit effort="1000.0" lower="-1.5708" upper="1.5708" velocity="0.5"/>
+    <origin rpy="0 0 -0.4" xyz="0.0 0.0 0.0695"/>
+    <parent link="base_link"/>
+    <child link="metacarpal_joint"/>
+  </joint>
+</robot>

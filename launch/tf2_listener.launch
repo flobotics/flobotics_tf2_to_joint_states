@@ -1,0 +1,20 @@
+<launch>
+	<arg name="robotic_finger" />
+        <arg name="gui" default="false" />
+        <param name="robot_description" textfile="/home/ros/catkin_ws/src/tf2_to_joint_state/rob.urdf" />
+        <param name="use_gui" value="$(arg gui)"/>
+	<!-- <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />  -->
+
+   	<node pkg="tf" type="static_transform_publisher" name="kinect2_broadcaster" args="0 0 0 0 0 0 map usb_cam 100" /> --> 
+	<node pkg="tf" type="static_transform_publisher" name="cam_broadcaster" args="0.3 0 0 0 0 0 usb_cam base_link 100" />  
+
+        <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />  
+        <node name="rviz" pkg="rviz" type="rviz" args="-d /home/ros/catkin_ws/src/tf2_to_joint_state/urdf2.rviz" required="true" />
+
+ 	<!-- <include file="/home/ros/catkin_ws/src/iai_kinect2/kinect2_bridge/launch/kinect2_bridge.launch"/> -->
+ 	<include file="$(find usb_cam)/launch/usb_cam-test.launch"/>
+
+	<include file="/home/ros/catkin_ws/src/ros_markers/launch/flodetect.launch"/>
+
+  	<node name="tf2_listener" pkg="tf2_to_joint_state" type="tf2_listener" output="screen" />
+</launch>
